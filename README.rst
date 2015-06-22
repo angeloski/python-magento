@@ -63,7 +63,7 @@ Here's how to launch it:
 
 ::
 
-    > magento-ipython-shell http_method http_auth_username http_auth_pass localhost.com 8888 api_user api_key
+    > magento-ipython-shell http_protocol http_auth_username http_auth_pass localhost.com 8888 api_user api_key
 
     -- magento-ipython-shell -----------------
     Connecting to 'http://localhost.com:8888/magento/api/xmlrpc'
