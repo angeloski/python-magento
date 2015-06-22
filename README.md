@@ -1,6 +1,6 @@
 # python-magento
 
-This is a simple Python interface to Magento's XML-RPC API. The API discovers and
+This is a fork to python-magento. The API discovers and
 makes all of Magento's API methods available to you.
 
 ## Usage
@@ -8,7 +8,7 @@ makes all of Magento's API methods available to you.
 ```python
 from magento import MagentoAPI
 
-magento = MagentoAPI("magentohost.com", 80, "test_api_user", "test_api_key")
+magento = MagentoAPI("https", "http_auth_username", "http_auth_pass", "magentohost.com", 443, "test_api_user", "test_api_key")
 
 magento.help() # Prints out all resources discovered and available.
 # cart: create, info, license, order, totals
@@ -56,7 +56,7 @@ you need. This is just a slightly nicer way to get started mucking around.
 Here's how to launch it:
 
 ```
-> magento-ipython-shell localhost.com 8888 api_user api_key
+> magento-ipython-shell http_method http_auth_username http_auth_pass localhost.com 8888 api_user api_key
 
 -- magento-ipython-shell -----------------
 Connecting to 'http://localhost.com:8888/magento/api/xmlrpc'

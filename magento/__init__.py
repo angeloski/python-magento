@@ -1,3 +1,4 @@
+import pdb
 try:
     import xmlrpclib
 except ImportError:
@@ -6,18 +7,21 @@ except ImportError:
 __all__ = ["MagentoAPI"]
 
 class MagentoAPI(object):
-    PATH = "/magento/api/xmlrpc"
+    PATH = "/api/xmlrpc/"
 
-    def __init__(self, host, port, api_user, api_key, path=None, allow_none=False, verbose=False):
+    def __init__(self, http_method, http_username, http_pass, host, port, api_user, api_key, path=None, allow_none=False, verbose=False):
         """Logs the client into Magento's API and discovers methods available
         to it. Throws an exception if logging in fails."""
         if path is None:
             path = MagentoAPI.PATH
+        self._http_method = http_method
+        self._http_username = http_username
+        self._http_pass = http_pass
         self._api_user = api_user
         self._api_key = api_key
         self._host = host
         self._port = str(port)
-        self._uri = "http://%s:%s" % (self._host, self._port) + path
+        self._uri = "%s://%s:%s@%s:%s" % (self._http_method, self._http_username, self._http_pass, self._host, self._port) + path
 
         self._client = xmlrpclib.ServerProxy(self._uri, allow_none=allow_none, verbose=verbose)
         self.login()

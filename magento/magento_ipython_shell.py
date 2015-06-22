@@ -17,6 +17,9 @@ def main():
         description=\
             "Launch an IPython shell with a MagentoAPI instance, 'magento' " + \
             "connected to a given endpoint.")
+    parser.add_argument("http_method", help="The Magento http method: set to http or https.")
+    parser.add_argument("http_username", help="The basic http auth username.")
+    parser.add_argument("http_pass", help="The basic http auth password.")
     parser.add_argument("host", help="The Magento server host.")
     parser.add_argument("port", type=int, help="The Magento server port.")
     parser.add_argument("api_user", help="The API user to log in as.")
@@ -28,6 +31,9 @@ def main():
     args = parser.parse_args()
 
     endpoint = {
+        "http_method": args.http_method,
+        "http_username": args.http_username,
+        "http_pass": args.http_pass,
         "host": args.host,
         "port": args.port,
         "api_user": args.api_user,
@@ -37,7 +43,7 @@ def main():
     }
 
     path = args.path if args.path else MagentoAPI.PATH
-    url = "http://%s:%d" % (args.host, args.port) + path
+    url = "%s://%s:%s@%s:%s" % (args.http_method, args.http_username, args.http_pass, args.host, args.port) + path
 
     print
     print
